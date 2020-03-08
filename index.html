@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<HEAD>
+<style>
+* {
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+}
+#video-tag {
+	float: center;
+	z-index: 99;
+}
+#ads-popup {
+	position:absolute;
+	width:350px;
+	height:100px;
+	top: 210px;
+	left: 30px;
+	font-size: 18px;
+	background-color: #e6e6e694;
+	z-index:100;
+	color: #303030;
+}
+#close a {
+	position:absolute;
+	top: 5px;
+	left: 520px;
+	z-index:100;
+	font-size: 140%;
+	text-decoration: none;
+}
+</style>
+</HEAD>
+
+<body>
+	<p><span id="seek_status"></span><p>
+
+	<div id="video-tag">
+		<div id="ads-popup">الاعلان 
+			<p>اهلا <a href="google.com">الذهاب الى صفحة الاعلان</a>
+			<div id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>
+				<p>تخفيضات هائلة سارع للشراء<p>
+					<img src="ads.jpg" alt="Trulli" width="500" height="50">
+<a href="#">[x]</a>
+			</div>
+		</div>
+
+		<div>
+			<video id="video-area" controls >
+				<source src='https://wiki.yoctoproject.org/wiki/images/a/a6/Big-buck-bunny_trailer.webm'>
+				Your browser doesn't support HTML5 video. Try a different browser instead.
+			</video>
+		</div>
+	</div>
+	<p>
+</body>
+
+<script>
+	var v = document.getElementById("video-area");
+	var idVar;
+
+	function showAds() {
+		document.getElementById("ads-popup").style.visibility="visible";
+	}
+
+	function hideAds() {
+		document.getElementById("ads-popup").style.visibility="hidden";
+	}
+
+	function catch_the_frame() {
+		var t;
+		t = Math.round(v.currentTime);
+		document.getElementById("seek_status").innerHTML="يظهر الاعلان بعد : " + t + " دقيقة";
+		if ( t >= 5 && t <= 10) {
+			showAds();
+		}else {
+			hideAds();
+		}
+
+		if (t > 10) {
+			clearInterval(idVar);
+			document.getElementById("seek_status").style.visibility="hidden";
+		} 
+	}
+
+	hideAds();
+
+	v.addEventListener('playing', function() {
+		idVar = setInterval(catch_the_frame,500);
+	}, false);
+
+
+</script>
+</html>
