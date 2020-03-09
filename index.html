@@ -8,28 +8,37 @@
 	padding: 0;
 }
 #video-tag {
-	float: center;
+	float: left;
 	z-index: 99;
 }
 #ads-popup {
-	position:absolute;
-	width:350px;
-	height:100px;
-	top: 210px;
-	left: 30px;
+	position: relative;
+	width:728px;
+	height:90px;
+	top: 510px;
+	left: 120px;
 	font-size: 18px;
-	background-color: #e6e6e694;
+	background-image: url('New Project.gif');
+	background-repeat: no-repeat;
 	z-index:100;
 	color: #303030;
 }
-#close a {
-	position:absolute;
-	top: 5px;
-	left: 520px;
-	z-index:100;
-	font-size: 140%;
+
+
+
+#seek_status {
+	position: relative;
+	top: 630px;
+	left: 760px;
+	z-index: 100;
+	font-size: 14px;
 	text-decoration: none;
+	background-color: black;
+	color: gold;
+	font-weight: bold;
+	padding: 3px;
 }
+
 </style>
 </HEAD>
 
@@ -37,19 +46,15 @@
 	<p><span id="seek_status"></span><p>
 
 	<div id="video-tag">
-		<div id="ads-popup">الاعلان 
-			<p>اهلا <a href="google.com">الذهاب الى صفحة الاعلان</a>
-			<div id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>
-				<p>تخفيضات هائلة سارع للشراء<p>
-					<img src="ads.jpg" alt="Trulli" width="500" height="50">
-<a href="#">[x]</a>
-			</div>
+		<div id="ads-popup">
+
+
 		</div>
 
 		<div>
 			<video id="video-area" controls >
-				<source src='https://wiki.yoctoproject.org/wiki/images/a/a6/Big-buck-bunny_trailer.webm'>
-				Your browser doesn't support HTML5 video. Try a different browser instead.
+				<source src='video.mp4'>
+				
 			</video>
 		</div>
 	</div>
@@ -71,8 +76,9 @@
 	function catch_the_frame() {
 		var t;
 		t = Math.round(v.currentTime);
-		document.getElementById("seek_status").innerHTML="يظهر الاعلان بعد : " + t + " دقيقة";
-		if ( t >= 5 && t <= 10) {
+		document.getElementById("seek_status").innerHTML="ينتهي الاعلان بعد : 10 ثانية " + t + " دقيقة";
+		
+		if ( t >= 1 && t <= 10 ) {
 			showAds();
 		}else {
 			hideAds();
@@ -82,6 +88,7 @@
 			clearInterval(idVar);
 			document.getElementById("seek_status").style.visibility="hidden";
 		} 
+
 	}
 
 	hideAds();
